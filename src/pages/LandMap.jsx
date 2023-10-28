@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, {useState, useEffect} from "react";
+import axios from 'axios';
 import { csv } from "d3-fetch";
 import { scaleLinear } from "d3-scale";
 import {
@@ -17,12 +18,21 @@ import "./../style/Heading.css";
 
 const geoUrl = "/world.json";
 
-const colorScale = scaleLinear()
-  .domain([0.29, 0.68])
-  .range(["#ffedea", "#ff5233"]);
 
-const Map = ({ setTooltipContent, year, position, setPosition, data }) => {
-  function handleZoomIn() {
+const Map = ({ setTooltipContent, position, setPosition, data, desc, year }) => {
+    
+    let domain = [0,100];
+
+    if (desc[0] === "P") {
+        domain = [0,10]
+    }
+
+    const colorScale = scaleLinear()
+      .domain(domain)
+      .range(["#ffedea", "#ff5233"]);
+    
+  
+    function handleZoomIn() {
     if (position.zoom >= 4) return;
     const newZoom = position.zoom * 2;
     setPosition((pos) => ({
@@ -43,7 +53,7 @@ const Map = ({ setTooltipContent, year, position, setPosition, data }) => {
   }
 
   return (
-    <Section component={<H className="centered-heading">Arable Land</H>}>
+    <Section component={<H className="centered-heading">{desc + " (" +year+ ")"}</H>}>
       <div>
         <ComposableMap
           projectionConfig={{
@@ -57,12 +67,17 @@ const Map = ({ setTooltipContent, year, position, setPosition, data }) => {
             <Geographies geography={geoUrl}>
               {({ geographies }) =>
                 geographies.map((geo) => {
-                  const d = data.find((s) => s.ISO3 === geo.id);
+                  let d = null;
+                  for (let i = 0;i< data.length;i++) {
+                    if (data[i].country === geo.properties.name) {
+                        d = data[i]
+                    }
+                  }
                   return (
                     <Geography
                       key={geo.rsmKey}
                       geography={geo}
-                      fill={d ? colorScale(d[year]) : "#F5F4F6"}
+                      fill={d ? colorScale(d.value) : "#F5F4F6"}
                       data-tip={`${geo.properties.name} (${geo.id})`}
                       data-for="map-tooltip"
                       onMouseEnter={() => {
@@ -70,6 +85,7 @@ const Map = ({ setTooltipContent, year, position, setPosition, data }) => {
                           setTooltipContent({
                             name: geo.properties.name,
                             iso3: geo.id,
+                            arableLand: d.value
                           });
                           ReactTooltip.rebuild();
                         }
@@ -122,15 +138,20 @@ const Map = ({ setTooltipContent, year, position, setPosition, data }) => {
   );
 };
 
-const WorldMap = () => {
+const LandMap = (desc) => {
   const [tooltipContent, setTooltipContent] = useState("");
   const { year } = useParams();
   const [position, setPosition] = useState({ zoom: 1, coordinates: [0, 0] });
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    csv("/vulnerability.csv").then((data) => {
-      setData(data);
+    axios.post("http://localhost:8081/get/land/desc-year",
+        {
+            "desc": desc.desc + "",
+            "year": year + ""
+        }
+    ).then((data) => {
+      setData(data.data);
     });
   }, []);
 
@@ -138,16 +159,18 @@ const WorldMap = () => {
     <div className="map">
       <Map
         setTooltipContent={setTooltipContent}
-        year={year}
         position={position}
         setPosition={setPosition}
         data={data}
+        desc={desc.desc}
+        year={year}
       />
       <ReactTooltip id="map-tooltip" effect="float" place="top" type="dark">
         {tooltipContent && (
           <div>
             <p>{tooltipContent.name}</p>
             <p>Country Code: {tooltipContent.iso3}</p>
+            <p>{desc.desc + ": "} {tooltipContent.arableLand + "%"}</p>
           </div>
         )}
       </ReactTooltip>
@@ -155,4 +178,4 @@ const WorldMap = () => {
   );
 };
 
-export default WorldMap;
+export default LandMap;

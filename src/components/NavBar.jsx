@@ -1,62 +1,50 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import '../style/NavBar.css'; // Import or create a CSS file for styling
-import SideNav from './SideNav'; // Import the SideNav component
-import React, { useEffect } from 'react';
+import React, {useRef} from 'react';
+import '../style/NavBar.css'; 
+import {Link} from 'react-router-dom'; 
+import '../style/SideNav.css';
 
 function NavBar() {
+  
+  const sideNav = useRef(null);
+  const mainNav = useRef(null);
+
   const openNav = () => {
-    document.getElementById("mySidenav").style.width = "250px";
-    document.getElementById("main").style.marginLeft = "250px";
+    sideNav.current.style.width = "300px";
   }
+
+  const closeNav = () => {
+    sideNav.current.style.width = "0";
+  }
+
   return (
     <>
-      <nav className="navbar">
-        <ul className="navbar-list">
+      <nav ref={mainNav} className="navbar">
         <span
-              style={{ fontSize: '30px', cursor: 'pointer' }}
               onClick={openNav} // Call openNav function on click
             >
-              &#9776; open
-            </span>
-          <li className="navbar-item">
-            <Link to="/" className="navbar-link">Home</Link>
-          </li>
-          <li className="navbar-item">
-            <Link to="/about" className="navbar-link">About</Link>
-          </li>
-          <li className="navbar-item">
-            <Link to="/world-map/2017" className="navbar-link">World map</Link>
-          </li>
-          <li className="navbar-item">
-            <Link to="/StatesMap" className="navbar-link">States map</Link>
-          </li>
-        </ul>
-        
+              &#9776;
+        </span>
       </nav>
 
       <nav className="navbar-spacer"></nav>
       
-      <SideNav /> {function SideNav() {
-  const openNav = () => {
-    document.getElementById('mySidenav').style.width = '250px';
-    document.getElementById('main').style.marginLeft = '250px';
-  };
-
-  const closeNav = () => {
-    document.getElementById('mySidenav').style.width = '0';
-    document.getElementById('main').style.marginLeft = '0';
-  };
-
-  return (
-    <div id="mySidenav" className="sidenav">
-      <a href="#" className="closebtn" onClick={closeNav}>&times;</a>
-      <a href="#">About</a>
-      <a href="#">Home</a>
-      <a href="#">World Map</a>    
+    <div ref={sideNav} id="mySidenav" className="sidenav">
+      <p className="closebtn" onClick={closeNav}>&times;</p>
+      <Link to="/">Home</Link>
+      <Link to="/about">About</Link>
+      <Link to="#">Maps of Arable Land</Link>    
+      <a style={{paddingLeft: "50px"}} href="/arable-land-map/2005"> 2005</a>
+      <a style={{paddingLeft: "50px"}} href="/arable-land-map/2010"> 2010</a>
+      <a style={{paddingLeft: "50px"}} href="/arable-land-map/2019"> 2019</a>
+      <a href="#">Maps of Forest Cover</a>    
+      <a style={{paddingLeft: "50px"}} href="/forest-land-map/2005"> 2005</a>
+      <a style={{paddingLeft: "50px"}} href="/forest-land-map/2010"> 2010</a>
+      <a style={{paddingLeft: "50px"}} href="/forest-land-map/2019"> 2019</a>
+      <a href="#">Maps of Permanent Crops</a>    
+      <a style={{paddingLeft: "50px"}} href="/permanent-crops-land-map/2005"> 2005</a>
+      <a style={{paddingLeft: "50px"}} href="/permanent-crops-land-map/2010"> 2010</a>
+      <a style={{paddingLeft: "50px"}} href="/permanent-crops-land-map/2019"> 2019</a>
     </div>
-  );
-}}
     </>
   );
 }

@@ -3,6 +3,8 @@
     font-size: 24px; /* Adjust the font size as needed */
     font-weight: bold; /* Adjust the font weight as needed */
     margin-bottom: 20px; /* Adjust the margin as needed */
+    margin-left: 20px;
     padding-top:50px;
     color: white;
+    position: absolute;
   }

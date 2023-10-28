@@ -6,6 +6,7 @@
     z-index: 1; /* Stay on top */
     top: 0;
     left: 0;
+    z-index:1001;
     background-color: #111; /* Black background color */
     overflow-x: hidden; /* Disable horizontal scroll */
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
@@ -19,6 +20,7 @@
     right: 25px;
     font-size: 36px;
     margin-left: 50px;
+    color: white;
   }
   
   /* Close button on hover */
@@ -34,6 +36,8 @@
     color: #818181; /* Text color */
     display: block; /* Make the links block elements to fill the full width */
     transition: 0.3s; /* 0.3 second transition on hover */
+    cursor: pointer;
+    z-index: 1000;
   }
   
   /* On hover, the links will change color */

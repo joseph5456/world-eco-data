@@ -4,9 +4,7 @@ import NavBar from "./components/NavBar";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import './style/App.css'
-import WorldMap from './pages/WorldMap';
-
-import WorldNav from "./components/WorldNav";
+import LandMap from "./pages/LandMap";
 
 function App() {
   return (
@@ -20,7 +18,9 @@ function App() {
           {/* 
             :year is the parameter at the end of the url
           */}
-          <Route path="/world-map/:year" element={<WorldMap/>} />
+          <Route path="/arable-land-map/:year" element={<LandMap desc={"Arable land (% of total land area)"}/>} />
+          <Route path="/forest-land-map/:year" element={<LandMap desc={"Forest cover (% of total land area)"}/>} />
+          <Route path="/permanent-crops-land-map/:year" element={<LandMap desc={"Permanent crops (% of total land area)"}/>} />
         </Routes>
       </Router>
     </div>
