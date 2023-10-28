@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import NavBar from "./components/NavBar";
-import Home from "./pages/Home";
 import About from "./pages/About";
 import './style/App.css'
 import LandMap from "./pages/LandMap";
@@ -13,8 +12,7 @@ function App() {
       <NavBar />
       {/*<WorldNav/> */}
         <Routes>
-          <Route path="/" exact element={<Home/>} />
-          <Route path="/about" element={<About/>} />
+          <Route path="/" exact element={<About/>} />
           {/* 
             :year is the parameter at the end of the url
           */}

@@ -30,8 +30,7 @@ function NavBar() {
       
     <div ref={sideNav} id="mySidenav" className="sidenav">
       <p className="closebtn" onClick={closeNav}>&times;</p>
-      <Link to="/">Home</Link>
-      <Link to="/about">About</Link>
+      <Link to="/">About</Link>
       <Link to="#">Maps of Arable Land</Link>    
       <a style={{paddingLeft: "50px"}} href="/arable-land-map/2005"> 2005</a>
       <a style={{paddingLeft: "50px"}} href="/arable-land-map/2010"> 2010</a>
