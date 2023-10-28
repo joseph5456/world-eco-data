@@ -142,5 +142,5 @@ const WorldMap = () => {
     </div>
   );
 };
-
+  
 export default WorldMap;
