@@ -1,0 +1,54 @@
+/* SideNav container */
+.sidenav {
+    height: 100%; /* Full-height */
+    width: 0; /* 0 width by default - hidden */
+    position: fixed;
+    z-index: 1; /* Stay on top */
+    top: 0;
+    left: 0;
+    background-color: #111; /* Black background color */
+    overflow-x: hidden; /* Disable horizontal scroll */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+    padding-top: 60px; /* Add padding at the top to avoid content overlap */
+  }
+  
+  /* Close button (top right) */
+  .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  
+  /* Close button on hover */
+  .closebtn:hover {
+    color: white;
+  }
+  
+  /* SideNav links */
+  .sidenav a {
+    padding: 8px 8px 8px 32px; /* Add some padding on the left */
+    text-decoration: none; /* Remove text decoration */
+    font-size: 25px;
+    color: #818181; /* Text color */
+    display: block; /* Make the links block elements to fill the full width */
+    transition: 0.3s; /* 0.3 second transition on hover */
+  }
+  
+  /* On hover, the links will change color */
+  .sidenav a:hover {
+    color: white;
+  }
+  
+  /* Main content */
+  #main {
+    transition: margin-left .5s; /* If you want a transition effect when sliding in the sidenav, use this */
+    padding: 16px; /* Add some padding to the main content */
+  }
+  
+  /* Media query for smaller screens */
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+  }

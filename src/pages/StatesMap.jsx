@@ -1,9 +1,19 @@
-import React, { useState, useEffect } from "react";
-import { ComposableMap, Geographies, Geography } from "react-simple-maps";
-import { scaleQuantile } from "d3-scale";
+import React, { useEffect, useState } from "react";
 import { csv } from "d3-fetch";
+import { scaleLinear } from "d3-scale";
+import {
+  ComposableMap,
+  Geographies,
+  Geography,
+  Graticule,
+  ZoomableGroup,
+  Sphere,
+} from "react-simple-maps";
+import ReactTooltip from "react-tooltip";
+import { useParams } from "react-router-dom";
+import "./../style/Button.css";
 
-const geoUrl = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json";
+const geoUrl = "/states.json";
 
 const MapChart = () => {
   const [data, setData] = useState([]);
@@ -33,7 +43,7 @@ const MapChart = () => {
       <Geographies geography={geoUrl}>
         {({ geographies }) =>
           geographies.map(geo => {
-            const cur = data.find(s => s.STUB_NAME === geo.properties.name);
+            const cur = data.find(s => s.STUB_NAME === geo.STUB_NAME);
             return (
               <Geography
                 key={geo.rsmKey}
