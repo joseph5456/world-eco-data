@@ -13,7 +13,7 @@ function App() {
     <div>
       <Router>
       <NavBar />
-      <WorldNav/>
+      {/*<WorldNav/> */}
         <Routes>
           <Route path="/" exact element={<Home/>} />
           <Route path="/about" element={<About/>} />
