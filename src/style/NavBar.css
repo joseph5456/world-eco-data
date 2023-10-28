@@ -1,0 +1,29 @@
+.navbar {
+    background-color: #3b4dd0; 
+    color: white;          
+    padding: 10px 0;       
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+  
+  .navbar-list {
+    list-style: none;      
+    display: flex;         
+    justify-content: center; 
+  }
+  
+  .navbar-item {
+    margin: 0 10px;         
+  }
+  
+  .navbar-link {
+    text-decoration: none;  
+    font-weight:800;
+    color: white;          
+  }
+  
+  .navbar-link:hover {
+    color: rgb(33, 33, 33);
+    transition: color .2s;
+  }

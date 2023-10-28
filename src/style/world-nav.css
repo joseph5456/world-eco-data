@@ -1,0 +1,22 @@
+.world-nav {
+    margin: 20px;
+    margin-top: 80px;
+    position: fixed;
+}
+
+.world-nav a {
+    padding: 5px;
+    text-decoration: none;
+    color: white;
+    border: white 1px solid;
+    font-weight: 600;
+    background-color: black;
+}
+
+.world-nav a:hover {
+    background-color: rgb(49, 49, 49);
+}
+
+.world-nav a:active {
+    background-color: rgb(85, 85, 85);
+}

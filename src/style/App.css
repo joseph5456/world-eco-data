@@ -1,0 +1,7 @@
+@import url('NavBar.css');
+@import url('./world-nav.css');
+
+.map {
+    background-color: rgb(44, 44, 44);
+    /*overflow: hidden;*/
+}
